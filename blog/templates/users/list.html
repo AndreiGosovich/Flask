@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Users list
+{% endblock %}
+
+{% block body %}
+	<h1>Users</h1>
+	<div class="list-group">
+		{% for user_id in users %}
+			<a href="{{ url_for('users_app.details', user_id=user_id) }}" class="list-group-item list-group-item-action">{{ users[user_id] }}</a>
+		{% endfor %}
+	</div>
+{% endblock %}
