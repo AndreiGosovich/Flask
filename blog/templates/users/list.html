@@ -6,9 +6,10 @@
 
 {% block body %}
 	<h1>Users</h1>
-	<div class="list-group">
-		{% for user_id in users %}
-			<a href="{{ url_for('users_app.details', user_id=user_id) }}" class="list-group-item list-group-item-action">{{ users[user_id] }}</a>
+	<div class="list-group  mb-3">
+		{% for user in users %}
+			<a href="{{ url_for('users_app.details', user_id=user.id) }}"
+			   class="list-group-item list-group-item-action">{{ user.full_name}}</a>
 		{% endfor %}
 	</div>
 {% endblock %}

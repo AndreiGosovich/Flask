@@ -6,11 +6,11 @@
 
 {% block body %}
 	<h1>Articles</h1>
-	<div class="list-group">
-		{% for article_id in articles %}
-			<a href="{{ url_for('articles_app.details', article_id=article_id) }}"
+	<div class="list-group  mb-3">
+		{% for article in articles %}
+			<a href="{{ url_for('articles_app.details', article_id=article.id) }}"
 			   class="list-group-item list-group-item-action">
-				{{ articles[article_id].get('title') }}
+				{{ article.title }}
 			</a>
 		{% endfor %}
 	</div>
