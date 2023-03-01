@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     password = Column(String(255))
     is_staff = Column(Boolean, nullable=False, default=False)
     full_name = Column(String(255))
+    address = Column(String(255), default="", server_default="")
 
     def __repr__(self):
-        return f"<User #{self.id} {self.full_name!r}>"
+        return self.username
