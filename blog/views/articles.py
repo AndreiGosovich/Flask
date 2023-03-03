@@ -23,6 +23,6 @@ def article_details(article_id: int):
     user = User.query.filter_by(id=article.author_id).one_or_none()
     article_author = 'none'
     if user is not None:
-        article_author = user.full_name
+        article_author = f'{user.first_name} {user.last_name}'
 
     return render_template('articles/details.html', article=article, article_author=article_author)

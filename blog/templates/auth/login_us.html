@@ -18,7 +18,7 @@ Login
     {{ form.csrf_token() }}
 
     {# show inputs #}
-    {% for field in ['username', 'password'] %}
+    {% for field in ['username'] %}
         {{ render_field(form[field]) }}
     {% endfor %}
 

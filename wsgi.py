@@ -1,6 +1,8 @@
+import os
+
 from blog.app import create_app
 from blog.models.database import db
-from werkzeug.security import generate_password_hash
+# from werkzeug.security import generate_password_hash
 
 app = create_app()
 
@@ -11,14 +13,31 @@ if __name__ == "__main__":
     )
 
 
-@app.cli.command("init-db")
-def init_db():
+# @app.cli.command("init-db")
+# def init_db():
+#     """
+#     Run in your terminal:
+#     flask init-db
+#     """
+#     db.create_all()
+#     print("done!")
+
+@app.cli.command("create-admin")
+def create_admin():
     """
     Run in your terminal:
-    flask init-db
+    ➜ flask create-admin
+    > created admin: <User #1 'admin'>
     """
-    db.create_all()
-    print("done!")
+    from blog.models import User
+
+    admin = User(username="admin", is_staff=True, first_name="Админ", last_name="Админыч", email="фвьшт@q.q")
+    admin.password = os.environ.get("ADMIN_PASSWORD") or "admin"
+
+    db.session.add(admin)
+    db.session.commit()
+
+    print("created admin:", admin)
 
 
 @app.cli.command("create-users")
@@ -28,26 +47,20 @@ def create_users():
     flask create-users
     """
     from blog.models import User
-    admin = User()
-    admin.username = "admin"
-    admin.is_staff = True
-    admin.full_name = "admin"
-    admin.email = "admin@q.q"
-    admin.password = generate_password_hash("admin")
-    ivan = User(username="ivan", full_name="Иванов Иван Иванович", email="ivan@q.q",
-                password=generate_password_hash("ivan"))
-    peter = User(username="peter", full_name="Петров Петр Петрович", email="peter@q.q",
-                 password=generate_password_hash("peter"))
-    sidor = User(username="sidor", full_name="Сидоров Сидор Сидорович", email="sidor@q.q",
-                 password=generate_password_hash("sidor"))
 
-    db.session.add(admin)
+    ivan = User(username="ivan", first_name="Иван", last_name="Иванов", email="ivan@q.q",
+                password="ivan")
+    peter = User(username="peter", first_name="Петр", last_name="Петров", email="peter@q.q",
+                 password="peter")
+    sidor = User(username="sidor", first_name="Сидор", last_name="Сидоров", email="sidor@q.q",
+                 password="sidor")
+
     db.session.add(ivan)
     db.session.add(peter)
     db.session.add(sidor)
     db.session.commit()
 
-    print("done! created users:", admin, ivan, peter, sidor)
+    print("done! created users:", ivan, peter, sidor)
 
 
 @app.cli.command("create-articles")
