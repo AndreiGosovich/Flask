@@ -49,11 +49,11 @@ def create_users():
     from blog.models import User
 
     ivan = User(username="ivan", first_name="Иван", last_name="Иванов", email="ivan@q.q",
-                password="ivan")
+                password="ivan", id=8)
     peter = User(username="peter", first_name="Петр", last_name="Петров", email="peter@q.q",
-                 password="peter")
+                 password="peter", id=9)
     sidor = User(username="sidor", first_name="Сидор", last_name="Сидоров", email="sidor@q.q",
-                 password="sidor")
+                 password="sidor", id=10)
 
     db.session.add(ivan)
     db.session.add(peter)
@@ -64,7 +64,7 @@ def create_users():
 
 
 @app.cli.command("create-articles")
-def create_users():
+def create_articles():
     """
     Run in your terminal:
     flask create-articles
@@ -72,14 +72,14 @@ def create_users():
     from blog.models import Article
     first = Article(
         title="Как правильно пользоваться Flask",
-        author_id=1,
+        author_id=8,
         text="Flask - это легковесный фреймворк для веб-приложений на языке Python. Он позволяет быстро и просто "
              "создавать веб-приложения, которые могут быть использованы в различных областях. В этой статье мы "
              "рассмотрим основы работы с Flask и научимся создавать простые веб-приложения.")
 
     second = Article(
         title="Как создать дизайн сайта в Bootstrap",
-        author_id=2,
+        author_id=9,
         text="Bootstrap - это один из самых популярных фреймворков для создания дизайна сайтов. Он предлагает "
              "множество готовых компонентов и классов, которые позволяют быстро и просто создавать красивые и "
              "современные сайты. В этой статье мы рассмотрим основы работы с Bootstrap и научимся создавать "
@@ -87,7 +87,7 @@ def create_users():
 
     third = Article(
         title="Как работать с базами данных в Flask",
-        author_id=3,
+        author_id=10,
         text="Базы данных - это очень важная часть любого веб-приложения. Они позволяют хранить и обрабатывать "
              "большие объемы данных, которые могут быть использованы в различных областях. В этой статье мы "
              "рассмотрим основы работы с базами данных в Flask и научимся создавать простые приложения, которые "

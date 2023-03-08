@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% from "macro/formhelpers.html" import render_field %}
+
+{% block title %}
+Create article
+{% endblock %}
+
+{% block body %}
+    <h1>Create article</h1>
+    <div>
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form method="post">
+            {{ form.csrf_token }}
+
+            {% for field in ['title', 'text'] %}
+                {{ render_field(form[field]) }}
+            {% endfor %}
+
+            {{ form.submit(class="btn btn-primary my-3") }}
+        </form>
+    </div>
+{% endblock %}

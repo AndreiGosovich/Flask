@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 
 {% block title %}
-	Article #{{ article.id }}
+	Article #{{ article.id }}: {{ article.title }}
 {% endblock %}
 
 {% block body %}
 	<h1>{{ article.tilte }}</h1>
-	<p><b>Author:</b><spa> {{ article_author }}</spa></p>
+	<p><b>Author:</b><spa> {{ article.author.user.first_name }} {{ article.author.user.last_name }}</spa></p>
 	<p>
 		{{ article.text }}
 	</p>
+	<div>
+		<b>Published:</b><spa> {{ article.dt_created }}</spa><br>
+		<b>Updated:</b><spa> {{ article.dt_updated }}</spa>
+	</div>
 	<div>
 		<a href="{{ url_for('articles_app.list') }}">Back to articles list</a>
 	</div>
