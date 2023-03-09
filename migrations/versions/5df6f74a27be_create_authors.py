@@ -39,4 +39,9 @@ def upgrade():
 
 
 def downgrade():
-    pass
+    from blog.models import Author
+    from blog.models.database import db
+    for _id in [8, 9, 10]:
+        author = Author.query.filter_by(id=_id).one_or_none()
+        db.session.delete(author)
+    db.session.commit()

@@ -16,7 +16,7 @@ Create article
         <form method="post">
             {{ form.csrf_token }}
 
-            {% for field in ['title', 'text'] %}
+            {% for field in ['title', 'text', 'tags'] %}
                 {{ render_field(form[field]) }}
             {% endfor %}
 

@@ -14,7 +14,6 @@ def authors_list():
 
 
 @authors_app.route("/<int:author_id>/", endpoint="details")
-@login_required
 def user_details(author_id: int):
     author = Author.query.filter_by(id=author_id).one_or_none()
     if author is None:

@@ -25,9 +25,9 @@
                 <div class="navbar-nav">
                     {% for (endpoint, label) in [
                         ('mainpage', 'Main page'),
-                        ('users_app.list', 'Users'),
                         ('articles_app.list', 'Articles'),
                         ('authors_app.list', 'Authors'),
+                        ('articles_app.tags', 'Tags'),
                         ]
                     %}
                         <a href="{{ url_for(endpoint) }}"
@@ -47,7 +47,9 @@
                         {% endfor %}
                     {% endif %}
 
-
+                    {% if current_user.is_staff %}
+                        <a class="nav-link" href="{{ url_for('users_app.list') }}">Users</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
