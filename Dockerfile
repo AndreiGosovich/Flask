@@ -17,6 +17,7 @@ RUN flask db upgrade
 RUN flask create-admin
 RUN flask create-users
 RUN flask create-articles
+RUN flask create-tags
 
 EXPOSE 5000
 

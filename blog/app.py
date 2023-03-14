@@ -7,6 +7,7 @@ import os
 from flask_migrate import Migrate
 from blog.security import flask_bcrypt
 from blog.views.authors import authors_app
+from blog.admin import admin
 
 
 def create_app() -> Flask:
@@ -32,6 +33,7 @@ def register_extentions(app):
     migrate.init_app(app, db, compare_type=True)
     login_manager.init_app(app)
     flask_bcrypt.init_app(app)
+    admin.init_app(app)
 
 
 def register_blueprints(app):

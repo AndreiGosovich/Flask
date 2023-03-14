@@ -7,10 +7,17 @@ from blog.models.database import db
 
 class Tag(db.Model):
     id = Column(Integer, primary_key=True)
-    name = Column(String(32), nullable=False, default="", server_default="")
+    name = Column(String(32), nullable=False)
 
     articles = relationship(
         "Article",
+        uselist=True,
         secondary=article_tag_association_table,
         back_populates="tags",
     )
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name

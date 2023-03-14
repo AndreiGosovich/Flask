@@ -11,8 +11,8 @@ class Article(db.Model):
     __tablename__ = 'articles'
 
     id = Column(Integer, primary_key=True)
-    title = Column(String(200), nullable=False, default="", server_default="")
-    text = Column(Text, nullable=False, default="", server_default="")
+    title = Column(String(200), nullable=False)
+    text = Column(Text, nullable=False)
     author_id = Column(Integer, ForeignKey("author.id", name="articles-author"))
     dt_created = Column(DateTime, default=datetime.utcnow, server_default=func.now())
     dt_updated = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -27,3 +27,6 @@ class Article(db.Model):
 
     def __repr__(self):
         return f"<Article #{self.id}: {self.title!r}>"
+
+    def __str__(self):
+        return self.title
