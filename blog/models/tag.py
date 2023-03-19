@@ -6,6 +6,7 @@ from blog.models.database import db
 
 
 class Tag(db.Model):
+    __tablename__ = 'tag'
     id = Column(Integer, primary_key=True)
     name = Column(String(32), nullable=False)
 

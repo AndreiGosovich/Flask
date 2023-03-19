@@ -24,15 +24,15 @@ def upgrade():
 
     op.bulk_insert(authors_table, [
         {
-            'user_id': '8',
+            'user_id': '1',
             'id': '8',
         },
         {
-            'user_id': '9',
+            'user_id': '1',
             'id': '9',
         },
         {
-            'user_id': '10',
+            'user_id': '1',
             'id': '10',
         }
     ])

@@ -4,20 +4,14 @@ WORKDIR /app
 
 RUN pip install --upgrade pip
 
+RUN apk add --no-cache bash
+
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-#COPY wsgi.py wsgi.py
-#COPY blog ./blog
 COPY . .
 
-#RUN flask db migrate
-RUN flask db upgrade
-
-RUN flask create-admin
-RUN flask create-users
-RUN flask create-articles
-RUN flask create-tags
+RUN chmod +x wait-for-postgres.sh
 
 EXPOSE 5000
 

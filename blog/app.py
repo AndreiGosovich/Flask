@@ -8,17 +8,22 @@ from flask_migrate import Migrate
 from blog.security import flask_bcrypt
 from blog.views.authors import authors_app
 from blog.admin import admin
+from blog.api import init_api
 
 
 def create_app() -> Flask:
     app = Flask(__name__)
 
-    cfg_name = os.environ.get("ProductionConfig") or "DevConfig"
+    cfg_name = os.environ.get("CONFIG_NAME") or "DevConfig"
     app.config.from_object(f"blog.configs.{cfg_name}")
 
     register_extentions(app)
     register_blueprints(app)
     register_commands(app)
+
+    # @app.before_first_request
+    # def create_tables():
+    #     db.create_all()
 
     @app.route("/", endpoint="mainpage")
     def index():
@@ -34,6 +39,7 @@ def register_extentions(app):
     login_manager.init_app(app)
     flask_bcrypt.init_app(app)
     admin.init_app(app)
+    api = init_api(app)
 
 
 def register_blueprints(app):
