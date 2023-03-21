@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Authors list
+{% endblock %}
+
+{% block body %}
+	<h1>Authors</h1>
+	<div>
+		{% if authors %}
+			<div class="list-group  mb-3">
+				{% for author in authors %}
+					<a href="{{ url_for('authors_app.details', author_id=author.id) }}"
+					   class="list-group-item list-group-item-action">{{ author.user.first_name }} {{ author.user.last_name }}</a>
+				{% endfor %}
+			</div>
+		{% else %}
+			<h3>No authors yet</h3>
+		{% endif %}
+	</div>
+{% endblock %}
