@@ -1,3 +1,4 @@
+import requests as requests
 from flask import Blueprint, render_template, request, current_app, redirect, url_for
 from flask_login import login_required, current_user
 from sqlalchemy.exc import IntegrityError
@@ -15,6 +16,13 @@ articles_app = Blueprint("articles_app", __name__)
 def articles_list():
     articles = Article.query.all()
     return render_template("articles/list.html", articles=articles)
+
+
+@articles_app.route("/list_api/", endpoint="list_api")
+def articles_list():
+    # articles = Article.query.all()
+    articles = requests.get('http://127.0.0.1:5000/api/articles/event_get_all_articles/').json()
+    return render_template("articles/list_api.html", articles=articles)
 
 
 @articles_app.route("/<int:article_id>/", endpoint="details")
