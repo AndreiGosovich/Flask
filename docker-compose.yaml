@@ -4,9 +4,9 @@ services:
   pg:
     image: postgres:12.7-alpine
     environment:
-      POSTGRES_DB: blog
+      POSTGRES_DB: blog_oio8
       POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: iV6hoKjoCKro7pjCvb1wIktMlQtuwiSF
       PGDATA: /app/pgdata
 #    volumes:
 #      - pgdata:/app/pgdata
@@ -18,7 +18,7 @@ services:
       dockerfile: ./Dockerfile
       context: .
     environment:
-      SQLALCHEMY_DATABASE_URI: postgresql://user:password@pg:5432/blog
+      SQLALCHEMY_DATABASE_URI: postgresql://user:iV6hoKjoCKro7pjCvb1wIktMlQtuwiSF@pg:5432/blog_oio8
       CONFIG_NAME: ProductionConfig
     volumes:
       - ./blog:/app/blog

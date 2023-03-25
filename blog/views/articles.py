@@ -5,7 +5,6 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
 from werkzeug.exceptions import NotFound
 
-import blog.app
 from blog.forms.articles import CreateArticleForm
 from blog.models import Article, Author, Tag
 from blog.models.database import db
@@ -23,7 +22,10 @@ def articles_list():
 @articles_app.route("/list_api/", endpoint="list_api")
 def articles_list():
     # articles = Article.query.all()
+    print(current_app.config["API_URL"])
     articles = requests.get(f'{current_app.config["API_URL"]}/api/articles/event_get_all_articles/').json()
+                        # 'https://flask-demo-czbf.onrender.com/api/articles/event_get_all_articles/'
+    print(articles)
     return render_template("articles/list_api.html", articles=articles)
 
 
