@@ -24,13 +24,13 @@ def articles_list():
     # articles = Article.query.all()
     try:
         api_url = current_app.config["API_URL"]
-        print(api_url)
+        # print(api_url)
         request_url = f'{api_url}/api/articles/event_get_all_articles/'
-        print(request_url)
+        # print(request_url)
         resp = requests.get(request_url)
-        print(resp)
+        # print(resp)
         articles = resp.json()
-        print(articles)
+        # print(articles)
     except Exception as e:
         articles = ""
         print(e)
