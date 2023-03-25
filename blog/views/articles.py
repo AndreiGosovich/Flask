@@ -23,7 +23,7 @@ def articles_list():
 def articles_list():
     api_url = current_app.config["API_URL"]
     request_url = f'{api_url}/api/articles/event_get_all_articles/'
-    resp = requests.get(request_url)
+    resp = requests.get(request_url, timeout=120)
     articles = resp.json()
     return render_template("articles/list_api.html", articles=articles)
 
