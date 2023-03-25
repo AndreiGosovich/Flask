@@ -13,7 +13,7 @@ class ArticleListEvents(EventsResource):
     def event_get_count(self):
         return {"count": Article.query.count()}
 
-    def event_get_all_articles(self):
+    def event_get_all_articles(self, _permission_user=None):
         ret_val = jsonify(articles=ArticleSchema().dump(Article.query.all(), many=True))
         return ret_val
 

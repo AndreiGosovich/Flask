@@ -5,9 +5,11 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
 from werkzeug.exceptions import NotFound
 
+import blog.app
 from blog.forms.articles import CreateArticleForm
 from blog.models import Article, Author, Tag
 from blog.models.database import db
+
 
 articles_app = Blueprint("articles_app", __name__)
 
@@ -21,7 +23,7 @@ def articles_list():
 @articles_app.route("/list_api/", endpoint="list_api")
 def articles_list():
     # articles = Article.query.all()
-    articles = requests.get('http://127.0.0.1:5000/api/articles/event_get_all_articles/').json()
+    articles = requests.get(f'{current_app.config["API_URL"]}/api/articles/event_get_all_articles/').json()
     return render_template("articles/list_api.html", articles=articles)
 
 
