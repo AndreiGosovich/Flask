@@ -21,20 +21,10 @@ def articles_list():
 
 @articles_app.route("/list_api/", endpoint="list_api")
 def articles_list():
-    # articles = Article.query.all()
-    try:
-        api_url = current_app.config["API_URL"]
-        print(api_url)
-        request_url = f'{api_url}/api/articles/event_get_all_articles/'
-        print(request_url)
-        resp = requests.get(request_url)
-        print(resp)
-        articles = resp.json()
-        print(articles)
-    except Exception as e:
-        articles = ""
-        print(e)
-
+    api_url = current_app.config["API_URL"]
+    request_url = f'{api_url}/api/articles/event_get_all_articles/'
+    resp = requests.get(request_url)
+    articles = resp.json()
     return render_template("articles/list_api.html", articles=articles)
 
 
