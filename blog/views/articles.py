@@ -22,15 +22,20 @@ def articles_list():
 @articles_app.route("/list_api/", endpoint="list_api")
 def articles_list():
     # articles = Article.query.all()
-    print(current_app.config["API_URL"])
     try:
-        articles = requests.get(f'{current_app.config["API_URL"]}/api/articles/event_get_all_articles/').json()
-                        # 'https://flask-demo-czbf.onrender.com/api/articles/event_get_all_articles/'
+        api_url = current_app.config["API_URL"]
+        print(api_url)
+        request_url = f'{api_url}/api/articles/event_get_all_articles/'
+        resp = requests.get(request_url)
+        print(resp)
+        articles = resp.json()
+        print(articles)
     except Exception as e:
+        articles = ""
         print(e)
 
-    print(articles)
-    return render_template("articles/list_api.html", articles=articles)
+    if articles:
+        return render_template("articles/list_api.html", articles=articles)
 
 
 @articles_app.route("/<int:article_id>/", endpoint="details")
