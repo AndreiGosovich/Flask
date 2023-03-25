@@ -35,8 +35,7 @@ def articles_list():
         articles = ""
         print(e)
 
-    if articles:
-        return render_template("articles/list_api.html", articles=articles)
+    return render_template("articles/list_api.html", articles=articles)
 
 
 @articles_app.route("/<int:article_id>/", endpoint="details")
