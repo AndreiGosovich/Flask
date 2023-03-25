@@ -26,6 +26,7 @@ def articles_list():
         api_url = current_app.config["API_URL"]
         print(api_url)
         request_url = f'{api_url}/api/articles/event_get_all_articles/'
+        print(request_url)
         resp = requests.get(request_url)
         print(resp)
         articles = resp.json()
