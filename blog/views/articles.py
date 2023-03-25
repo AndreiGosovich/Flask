@@ -23,8 +23,12 @@ def articles_list():
 def articles_list():
     # articles = Article.query.all()
     print(current_app.config["API_URL"])
-    articles = requests.get(f'{current_app.config["API_URL"]}/api/articles/event_get_all_articles/').json()
+    try:
+        articles = requests.get(f'{current_app.config["API_URL"]}/api/articles/event_get_all_articles/').json()
                         # 'https://flask-demo-czbf.onrender.com/api/articles/event_get_all_articles/'
+    except Exception as e:
+        print(e)
+
     print(articles)
     return render_template("articles/list_api.html", articles=articles)
 
