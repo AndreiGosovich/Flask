@@ -1,0 +1,38 @@
+version: '3.5'
+
+services:
+  pg:
+    image: postgres:12.7-alpine
+    environment:
+      POSTGRES_DB: blog_oio8
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: iV6hoKjoCKro7pjCvb1wIktMlQtuwiSF
+      PGDATA: /app/pgdata
+#    volumes:
+#      - pgdata:/app/pgdata
+#      - ${HOME}/Рабочий\ стол/Flask/pgdata:/app/pgdata
+    ports:
+      - 5432:5432
+  app:
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    environment:
+      SQLALCHEMY_DATABASE_URI: postgresql://user:iV6hoKjoCKro7pjCvb1wIktMlQtuwiSF@pg:5432/blog_oio8
+      CONFIG_NAME: ProductionConfig
+    volumes:
+      - ./blog:/app/blog
+    ports:
+      - 5000:5000
+#    command: bash -c "
+#      ./wait-for-postgres.sh pg
+#      && flask db upgrade
+#      && flask create-admin
+#      && flask create-users
+#      && flask create-articles
+#      && flask create-tags
+#      "
+    depends_on:
+      - pg
+#volumes:
+#  pgdata:

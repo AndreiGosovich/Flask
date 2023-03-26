@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	{{ article.title }}
+{% endblock %}
+
+{% block body %}
+	<p class="h1">{{ article.title }}</p>
+	<h5>Author: <small class="text-muted">{{ article.author.user.first_name }} {{ article.author.user.last_name }}</small></h5>
+	<p class="lead">
+		{{ article.text }}
+	</p>
+	<dl class="row">
+		{% if article.tags %}
+			<dt class="col-sm-2">Tags</dt>
+			<dd class="col-sm-9">
+				{% for tag in article.tags %}
+
+						<a class="text-decoration-none" href="{{ url_for('articles_app.tag_details', tag_id=tag.id) }}">
+							<span class="badge rounded-pill bg-success">{{ tag.name }}</span>
+						</a>
+
+				{% endfor %}
+			</dd>
+		{% endif %}
+
+		<dt class="col-sm-2">Published</dt>
+  		<dd class="col-sm-9">{{ article.dt_created }}</dd>
+
+		<dt class="col-sm-2">Updated</dt>
+  		<dd class="col-sm-9">{{ article.dt_updated }}</dd>
+	</dl>
+	<div>
+		<a href="{{ url_for('articles_app.list') }}">Back to articles list</a>
+	</div>
+{% endblock %}
